@@ -31,6 +31,7 @@ class UserLoginView(generics.CreateAPIView):
         # Puedes personalizar la respuesta según tus necesidades
         response_data = {
             'token': token.key,
+            'username': user.username,
             'message': 'Inicio de sesión exitoso',
             # 'redirect_url': 'http://127.0.0.1:3000/login/',
         }

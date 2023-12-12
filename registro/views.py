@@ -12,8 +12,8 @@ class UserRegistrationView(generics.CreateAPIView):
         user = serializer.save()
         response_data = serializer.data
 
-        response_data['message'] = 'Registro exitoso'
-        response_data['redirect_url'] = 'http://cuenta/login/'
+        # response_data['message'] = 'Registro exitoso'
+        # response_data['redirect_url'] = 'http://127.0.0.1:3000/frontend/login/'
 
         headers = self.get_success_headers(response_data)
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)

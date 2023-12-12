@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registro</title>
+</head>
+<body>
+    <div class="columns">
+        <h1>REgistro</h1>
+        {% if form.errors %}
+            <p>
+                El username y password igresados son incorrectos.
+                <br>
+                Intentalo denuevo
+            </p>
+        {% else %}
+            <p>Por favor, utilice el siguiente formulario para iniciar sesión: </p>
+        {% endif %}
+
+        <div class="registro-form">
+            <form action="{% url 'login' %}" method="post">
+                {% load widget_tweak %}
+                {% for field in form %}
+                    {{field.label_tag}}
+                    {% render_field field class+="input mt-2" %}
+                {% endfor %}
+                {% csrf_token %}
+                <input type="submit" value="log-in" class="button mt-2">
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

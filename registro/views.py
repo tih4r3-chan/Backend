@@ -1,14 +1,19 @@
-from django.shortcuts import render, redirect
-from .forms import RegistrationForm
-from django.http import HttpResponse
+from rest_framework import generics, status
+from rest_framework.response import Response
+from .serializers import UserProfileSerializer
 
+class UserRegistrationView(generics.CreateAPIView):
+    serializer_class = UserProfileSerializer
 
-def user_registration(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('http://127.0.0.1:8000/cuenta/login/')
-    else:
-        form = RegistrationForm()
-    return render(request, 'registro.html', {'form': form})
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        
+        user = serializer.save()
+        response_data = serializer.data
+
+        response_data['message'] = 'Registro exitoso'
+        response_data['redirect_url'] = 'http://cuenta/login/'
+
+        headers = self.get_success_headers(response_data)
+        return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)

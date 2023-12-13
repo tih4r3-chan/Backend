@@ -1,13 +1,10 @@
-from django.contrib.auth import logout
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+from django.contrib.auth import logout
 
-@csrf_protect
+@require_POST
 @login_required
 def cerrar_sesion(request):
-    if request.method == 'POST':
-        logout(request)
-        return JsonResponse({'mensaje': 'Sesión cerrada exitosamente'})
-    else:
-        return JsonResponse({'error': 'Método no permitido'}, status=405)
+    logout(request)
+    return JsonResponse({'mensaje': 'Sesión cerrada exitosamente'})

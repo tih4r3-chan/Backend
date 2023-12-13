@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'registro.apps.RegistroConfig',
+    'logout.apps.LogoutConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'django.contrib.admin',

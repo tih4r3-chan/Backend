@@ -122,7 +122,7 @@ WSGI_APPLICATION = 'autenticacion_project.wsgi.application'
     'OPTIONS': {
         'sql_mode': 'traditional',
     }
-    }
+}
 
 
 # Password validation
